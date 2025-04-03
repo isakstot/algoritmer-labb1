@@ -9,17 +9,33 @@ namespace Labb1
         {
             int min = 0;
             int max = 10;
-            int[] ten = new int[100000];
             Random randNum = new Random(420);
-            for (int i = 0; i < ten.Length; i++)
+
+            int[] ten = CreateRandomArray(10);
+            int[] oneHundred = CreateRandomArray(100);
+            int[] oneThousand = CreateRandomArray(1000);
+            int[] oneHundredThousand = CreateRandomArray(100000);
+            int[] oneMillion = CreateRandomArray(1000000);
+
+            // todo: spara värdena i variabler
+            Console.WriteLine(CountNumber(ten, 1).TotalMilliseconds.ToString());
+            Console.WriteLine(CountNumber(oneHundred, 1).TotalMilliseconds.ToString());
+            Console.WriteLine(CountNumber(oneThousand, 1).TotalMilliseconds.ToString());
+            Console.WriteLine(CountNumber(oneHundredThousand, 1).TotalMilliseconds.ToString());
+            Console.WriteLine(CountNumber(oneMillion, 1).TotalMilliseconds.ToString());
+            
+
+            int[] CreateRandomArray(int n)
             {
-                ten[i] = randNum.Next(min, max);
+                int[] array = new int[n];
+                for (int i = 0; i < array.Length; i++)
+                {
+                    array[i] = randNum.Next(min, max);
+                }
+                return array;
             }
-
-            string timeTaken = (CountNumber(ten, 1).TotalMilliseconds).ToString();
-            Console.WriteLine("Miliseconds: "+ timeTaken);
-
         }
+
         static TimeSpan CountNumber(int[] allNumbers, int desiredNumber)
         {
             var timer = new Stopwatch();
